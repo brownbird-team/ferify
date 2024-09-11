@@ -39,10 +39,11 @@ class ConfigContext {
         this.admins = Array.isArray(cfg.admins) ? 
             cfg.admins.filter(admin => typeof(admin) == 'string') : [];
 
-        if (!cfg.discordBotToken)
-            console.warn('Discord bot token is empty');
+        if (!cfg.discordBotToken || !cfg.discrodClientId)
+            console.warn('Incomplete discord bot configuration provided');
 
         this.discordBotToken = cfg.discordBotToken || 'INVALID_TOKEN';
+        this.discordClientId = cfg.discrodClientId || 'INVALID CLIEND ID'
     }
 }
 

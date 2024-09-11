@@ -15,5 +15,6 @@
         "YOUR_DISCORD_USER_ID"
     ],
 
-    "discordBotToken": "BOT_TOKEN_GOES_HERE"
+    "discordBotToken": "BOT_TOKEN_GOES_HERE",
+    "discrodClientId": "BOT_CLIENT_ID_GOES_HERE"
 }
