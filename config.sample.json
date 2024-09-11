@@ -1,0 +1,19 @@
+{
+    "appName": "FERify",
+    "language": "en",
+    "blacklistEmail": "blacklist@example.com",
+
+    "smtpHost": "smtp.example.com",
+    "smtpPort": 587,
+    "smtpUsername": "bot@example.com",
+    "smtpPassword": "password1234",
+
+    "smtpFromName": "FERify Bot",
+    "smtpFromAddress": null,
+
+    "admins": [ 
+        "YOUR_DISCORD_USER_ID"
+    ],
+
+    "discordBotToken": "BOT_TOKEN_GOES_HERE"
+}
