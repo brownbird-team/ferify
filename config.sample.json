@@ -11,6 +11,12 @@
     "smtpFromName": "FERify Bot",
     "smtpFromAddress": null,
 
+    "databaseHost": "127.0.0.1",
+    "databasePort": 3066,
+    "databaseName": "ferify_db",
+    "databaseUsername": "username",
+    "databasePassword": "password",
+
     "admins": [ 
         "YOUR_DISCORD_USER_ID"
     ],

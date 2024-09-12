@@ -36,6 +36,15 @@ class ConfigContext {
         this.smtpFromName = cfg.smtpFromName || 'FERify';
         this.smtpFromAddress = cfg.smtpFromAddress || this.smtpUsername;
 
+        if (!cfg.databaseHost || !cfg.databasePort || !cfg.databaseName || !cfg.databaseUsername || !cfg.databasePassword)
+            throw Error("Incomplete database configuration provided");
+
+        this.databaseHost = cfg.databaseHost;
+        this.databasePort = cfg.databasePort;
+        this.databaseName = cfg.databaseName;
+        this.databaseUsername = cfg.databaseUsername;
+        this.databasePassword = cfg.databasePassword;
+
         this.admins = Array.isArray(cfg.admins) ? 
             cfg.admins.filter(admin => typeof(admin) == 'string') : [];
 
@@ -47,5 +56,3 @@ class ConfigContext {
 }
 
 exports.ConfigContext = ConfigContext;
-
-const cf = ConfigContext.getInstance();
