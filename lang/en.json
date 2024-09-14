@@ -1,0 +1,18 @@
+{
+    "appTitle": "asdasdasdas",
+    "verifyEmail": [
+        "Hello {{emailAddress}},",
+        "This is your email: {{emailAddress}}",
+        "",
+        "Thank you for contacting us :)"
+    ],
+
+    "discord": {
+        "title": "aaaa",
+        "nesto": "bbbb\n"
+    },
+
+    "errors": {
+        "internalError": "Internal application error occurred"
+    }
+}

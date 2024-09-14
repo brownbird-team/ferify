@@ -11,6 +11,18 @@
     "smtpFromName": "FERify Bot",
     "smtpFromAddress": null,
 
+    "imapHost": "imap.example.com",
+    "imapPort": 993,
+    "imapUsername": "bot@example.com",
+    "imapPassword": "password1234",
+    
+    "aliasHelp": "bot@brownbird.eu",
+    "aliasUnlock": "unlock.bot@example.com",
+    "aliasBlacklist": "blacklist.bot@example.com",
+    "aliasUnblacklist": "unblacklist.bot@example.com",
+
+    "supportEmail": "support@example.com",
+
     "databaseHost": "127.0.0.1",
     "databasePort": 3066,
     "databaseName": "ferify_db",

@@ -15,7 +15,9 @@ class DatabaseContext {
         if (DatabaseContext.instance)
             return DatabaseContext.instance;
 
-        DatabaseContext.instance = new DatabaseContext();
+        const config = ConfigContext.getInstance();
+
+        DatabaseContext.instance = new DatabaseContext(config);
         return DatabaseContext.instance;
     }
 

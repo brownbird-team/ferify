@@ -26,7 +26,7 @@ class ConfigContext {
         this.blacklistEmail = cfg.blacklistEmail || 'blacklist.ferify@example.com';
 
         if (!cfg.smtpHost || !cfg.smtpPort || !cfg.smtpUsername || !cfg.smtpPassword)
-            console.warn('Incomplete email configuration provided');
+            console.warn('Incomplete SMTP configuration provided');
         
         this.smtpHost = cfg.smtpHost || 'smtp.example.com';
         this.smtpPort = cfg.smtpPost || 587;
@@ -35,6 +35,21 @@ class ConfigContext {
         
         this.smtpFromName = cfg.smtpFromName || 'FERify';
         this.smtpFromAddress = cfg.smtpFromAddress || this.smtpUsername;
+
+        if (!cfg.imapHost || !cfg.imapPort || !cfg.imapUsername || !cfg.imapPassword)
+            console.warn('Incomplete IMAP configuration provided');
+
+        this.imapHost = cfg.imapHost || 'imap.example.com';
+        this.imapPort = cfg.imapPort || 993;
+        this.imapUsername = cfg.imapUsername || 'ferify@example.com';
+        this.imapPassword = cfg.imapPassword || 'password';
+    
+        this.aliasHelp = cfg.aliasHelp || 'ferify@example.com';
+        this.aliasUnlock = cfg.aliasUnlock || 'unlock.ferify@example.com';
+        this.aliasBlacklist = cfg.aliasBlacklist || 'blacklist.ferify@example.com';
+        this.aliasUnblacklist = cfg.aliasUnblacklist || 'unblacklist.ferify@example.com';
+
+        this.supportEmail = cfg.supportEmail || 'support@example.com';
 
         if (!cfg.databaseHost || !cfg.databasePort || !cfg.databaseName || !cfg.databaseUsername || !cfg.databasePassword)
             throw Error("Incomplete database configuration provided");
@@ -52,7 +67,7 @@ class ConfigContext {
             console.warn('Incomplete discord bot configuration provided');
 
         this.discordBotToken = cfg.discordBotToken || 'INVALID_TOKEN';
-        this.discordClientId = cfg.discrodClientId || 'INVALID CLIEND ID'
+        this.discordClientId = cfg.discrodClientId || 'INVALID_CLIEND_ID'
     }
 }
 
