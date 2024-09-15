@@ -1,5 +1,7 @@
+// @ts-check
+
 const config = require('../config.json');
-const { z } = require('zod')
+const { z } = require('zod');
 
 const ConfigContextScheme = z.object({
     appName: z.string(),
@@ -12,11 +14,12 @@ const ConfigContextScheme = z.object({
     smtpPassword: z.string(),
   
     smtpFromName: z.string(),
-    smtpFromAddress: z.string().nullable(),
+    smtpFromAddress: z.string().nullable()
+        .transform((value) => value === null ? '' : value),
   
     imapHost: z.string(),
     imapPort: z.number(),
-    imapUsername: z.string().email(),
+    imapUsername: z.string(),
     imapPassword: z.string(),
   
     aliasHelp: z.string().email(),
@@ -35,37 +38,67 @@ const ConfigContextScheme = z.object({
     admins: z.array(z.string()),
   
     discordBotToken: z.string(),
-    discrodClientId: z.string()
+    discrodClientId: z.string(),
 })
+.transform((result) => {
+    if (!result.smtpFromAddress)
+        result.smtpFromAddress = result.smtpUsername;
 
-/** @typedef { z.infer<typeof ConfigContextScheme>} Config */
+    return result;
+});
+
+/** 
+ * @typedef { z.infer<typeof ConfigContextScheme>} Config 
+ */
 
 class ConfigContext {
+    /** @type {ConfigContext | null} */
     static instance = null;
 
+    /** @type {Config} */
+    config;
+
     /**
-     * @returns {Config}
+     * Return ConfigContext global instance
+     * 
+     * @returns {ConfigContext}
      */
     static getInstance() {
         if (ConfigContext.instance)
-            return ConfigContext.instance.config;
+            return ConfigContext.instance;
 
         ConfigContext.instance = new ConfigContext();
-        return ConfigContext.instance.config;
+        return ConfigContext.instance;
+    }
+
+    /**
+     * Return config object stored in ConfigContext global instance
+     * 
+     * @returns {Config}
+     */
+    static getConfig() {
+        return ConfigContext.getInstance().config;
     }
 
     constructor() {
-        try{
+        try {
             this.config = ConfigContextScheme.parse(config)
-        }
-        catch(err){
+
+        } catch(err) {
             if(err instanceof z.ZodError){
-                const paths = err.errors.map(error => error.path);
-                console.error('Config is missing:', paths);
+                const paths = err.errors.map(
+                    error => `    => ${error.path}: ${error.message}`
+                );
+
+                console.error('Following configuration errors occurred:');
+                console.error(paths.join('\n'));
+
+                throw new Error('Cannot start application with invalid configuration');
             }
-            else
-                console.log(err)
+
+            throw err;
         }
     }
 }
+
 exports.ConfigContext = ConfigContext;
