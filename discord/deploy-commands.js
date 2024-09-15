@@ -3,7 +3,7 @@ const { ConfigContext} = require('../contexts/ConfigContext.js');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const cfg = ConfigContext.getInstance()
+const cfg = ConfigContext.getConfig()
 
 const commands = [];
 

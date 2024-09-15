@@ -1,6 +1,41 @@
 {
     "discord": {
-        
+        "helpEmbed": {
+            "title": "Help",
+            "help":{
+                "title": "/help",
+                "description": "Displays this message :)"
+            },
+            "register":{
+                "title": "/register [email]",
+                "description": "Used to send verification code to users email"
+            },
+            "verify":{
+                "title": "/verify [code]",
+                "description": "Used to input verification code"
+            },
+            "lock":{
+                "title": "/lock [on/off]",
+                "description": [
+                    "Used to prohibit bot from sending you emails after ",
+                    "you verified yourself (In case you lose your discord ",
+                    "account and need to unlock your mail you can do it by ",
+                    "sending an email to {{unlockEmail}})"
+                ]
+            },            
+            "status":{
+                "title": "/status",
+                "description": "Displays your verification status and lock info"
+            },
+            "set_verified_role":{
+                "title": "/set_verified_role",
+                "description": "Opens dropdown menu for selecting role which will be granted to verified users"
+            },
+            "set_unverified_role":{
+                "title": "/set_unverified_role",
+                "description": "Opens dropdown menu for selecting role which will be granted to unverified"
+            }
+        }
     },
 
     "errors": {

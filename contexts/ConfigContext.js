@@ -3,6 +3,12 @@
 const config = require('../config.json');
 const { z } = require('zod');
 
+const hexColorRegex = /^#([0-9a-f]{3}){1,2}$/i;
+/**
+ * @param {string} value
+ */
+const checkHexColor = (value) => hexColorRegex.test(value)
+
 const ConfigContextScheme = z.object({
     appName: z.string(),
     appWebsite: z.string(),
@@ -40,6 +46,12 @@ const ConfigContextScheme = z.object({
   
     discordBotToken: z.string(),
     discrodClientId: z.string(),
+
+    discordColors: z.object({
+        success : z.string().refine(checkHexColor),
+        error: z.string().refine(checkHexColor),
+    }),
+    discordHelpEmbedCommands : z.array(z.string())   
 })
 .transform((result) => {
     if (!result.smtpFromAddress)
@@ -101,5 +113,5 @@ class ConfigContext {
         }
     }
 }
-
+ConfigContext.getInstance()
 exports.ConfigContext = ConfigContext;
