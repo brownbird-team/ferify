@@ -57,7 +57,8 @@
             "blacklisted": "Successfully blacklisted",
             "unblacklisted": "Successfully removed from blacklist",
             "verificationCode": "Verification code",
-            "invalidEmailAddress": "Request denied"
+            "invalidEmailAddress": "Request denied",
+            "unblacklistDenied": "Failed to fulfil your request"
         },
 
         "body": {
@@ -106,6 +107,10 @@
                 "{{appName}} discord bot only accepts email addresses of certain format, ",
                 "your address {{email}} is not valid and thus the action you requested will ",
                 "not be performed."
+            ],
+
+            "unblacklistDenied": [
+                "Something went wrong, please try again later..."
             ],
 
             "footer": [

@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "54c06354-bde4-4eeb-a099-0afc56279de2",
+  "id": "69d6bf7e-ae2a-4463-be28-406fd272ae4a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "users": {
@@ -9,35 +9,37 @@
       "columns": {
         "user_id": {
           "name": "user_id",
-          "type": "varchar",
+          "type": "varchar(20)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
         "email_hash": {
           "name": "email_hash",
-          "type": "varchar",
+          "type": "varchar(2048)",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "locked": {
           "name": "locked",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
         },
         "verified": {
           "name": "verified",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
         },
         "code": {
           "name": "code",
-          "type": "varchar",
+          "type": "varchar(2048)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -60,51 +62,96 @@
           ]
         }
       },
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "users_email_hash_unique": {
+          "name": "users_email_hash_unique",
+          "columns": [
+            "email_hash"
+          ]
+        }
+      }
     },
     "blacklist": {
       "name": "blacklist",
       "columns": {
-        "email_hash": {
-          "name": "email_hash",
-          "type": "varchar",
+        "id": {
+          "name": "id",
+          "type": "bigint unsigned",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "email_hash": {
+          "name": "email_hash",
+          "type": "varchar(2048)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locked": {
+          "name": "locked",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
         },
         "blacklisted": {
           "name": "blacklisted",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": true
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "blacklist_email_hash": {
-          "name": "blacklist_email_hash",
+        "blacklist_id": {
+          "name": "blacklist_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "blacklist_email_hash_unique": {
+          "name": "blacklist_email_hash_unique",
           "columns": [
             "email_hash"
           ]
         }
-      },
-      "uniqueConstraints": {}
+      }
     },
     "guilds": {
       "name": "guilds",
       "columns": {
         "guild_id": {
           "name": "guild_id",
-          "type": "varchar",
+          "type": "varchar(20)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "allowed": {
-          "name": "allowed",
+        "whitelisted": {
+          "name": "whitelisted",
           "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "verified_role_id": {
+          "name": "verified_role_id",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "unverified_role_id": {
+          "name": "unverified_role_id",
+          "type": "varchar(20)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -117,57 +164,6 @@
           "name": "guilds_guild_id",
           "columns": [
             "guild_id"
-          ]
-        }
-      },
-      "uniqueConstraints": {}
-    },
-    "guild_roles": {
-      "name": "guild_roles",
-      "columns": {
-        "role_id": {
-          "name": "role_id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "guild_id": {
-          "name": "guild_id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "type": {
-          "name": "type",
-          "type": "enum('verified','unverified')",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "guild_roles_guild_id_guilds_guild_id_fk": {
-          "name": "guild_roles_guild_id_guilds_guild_id_fk",
-          "tableFrom": "guild_roles",
-          "tableTo": "guilds",
-          "columnsFrom": [
-            "guild_id"
-          ],
-          "columnsTo": [
-            "guild_id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "guild_roles_role_id": {
-          "name": "guild_roles_role_id",
-          "columns": [
-            "role_id"
           ]
         }
       },
