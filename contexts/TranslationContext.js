@@ -1,10 +1,28 @@
+// @ts-check
+
 const fs = require('fs');
-const path = require('path')
+const path = require('path');
 
 const { ConfigContext } = require('./ConfigContext.js')
 
+/** @typedef {import('./ConfigContext.js').Config} Config */
+
+/**
+ * Function type returned by TranslationContext and used
+ * to fetch translations
+ * 
+ * @callback Translator
+ * @param {string} key
+ * @param {Object<string, string>} [properties]
+ * @returns {string}
+ */ 
+
 class TranslationContext {
+    /** @type {TranslationContext | null} */
     static instance = null;
+
+    /** @type {Config} */
+    config;
 
     /**
      * Return TranslationContext global instanc
@@ -14,17 +32,17 @@ class TranslationContext {
         if (TranslationContext.instance)
             return TranslationContext.instance;
 
-        const config = ConfigContext.getInstance();
+        const config = ConfigContext.getConfig();
 
         TranslationContext.instance = new TranslationContext(config);
         return TranslationContext.instance;
     }
 
     /**
-     * @param {ConfigContext} configCtx 
+     * @param {Config} config
      */
-    constructor(configCtx) {
-        this.config = configCtx;
+    constructor(config) {
+        this.config = config;
 
         const translationObjects = new Map();
         const languageDir = path.resolve(__dirname + '/../lang/');
@@ -70,7 +88,7 @@ class TranslationContext {
      * Get translator function for given language
      * 
      * @param {string} language 
-     * @returns {function}
+     * @returns {Translator}
      */
     getTranslator(language) {
         if (!this.translations.has(language))
@@ -110,7 +128,7 @@ class TranslationContext {
     /**
      * Get translator function for language configured in app config
      * 
-     * @returns {function}
+     * @returns {Translator}
      */
     getGlobalTranslator() {
         const lang = this.translationExists(this.config.language) ? this.config.language : 'en';
@@ -132,8 +150,3 @@ exports.TranslationContext = TranslationContext;
  * 
  * console.log(t('verifyEmail', { emailAddress: 'r@r.com' }))
  */
-
-const tctx = TranslationContext.getInstance();
-const t = tctx.getGlobalTranslator();
-
-console.log(t('verifyEmail', { emailAddress: 'r@r.com' }))

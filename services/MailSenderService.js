@@ -1,24 +1,32 @@
+// @ts-check
+
 const nodemailer = require('nodemailer');
-const { ConfigContext } = require('../contexts/ConfigContext.js');
 const { TranslationContext } = require('../contexts/TranslationContext.js');
+
+/** @typedef {import('../contexts/ConfigContext.js').Config} Config */
 
 class MailSenderService {
 
+    /** @type {Config} */
+    config;
+    /** @type {TranslationContext} */
+    translation;
+
     /**
-     * @param {ConfigContext} configCtx
+     * @param {Config} config
      * @param {TranslationContext} translationCtx
      */
-    constructor(configCtx, translationCtx) {
-        this.config = configCtx;
+    constructor(config, translationCtx) {
+        this.config = config;
         this.translation = translationCtx;
 
         this.transporter = nodemailer.createTransport({
-            host: configCtx.smtpHost,
-            port: configCtx.smtpPort,
-            secure: configCtx.smtpPort == 465,
+            host: config.smtpHost,
+            port: config.smtpPort,
+            secure: config.smtpPort == 465,
             auth: {
-                user: configCtx.smtpUsername,
-                pass: configCtx.smtpPassword,
+                user: config.smtpUsername,
+                pass: config.smtpPassword,
             },
         });
     }
@@ -33,7 +41,7 @@ class MailSenderService {
     async sendMail(email, subject, body) {
         const t = this.translation.getGlobalTranslator();
 
-        const body = 
+        const fullBody = 
             t('email.body.header') + 
             '\n\n' + 
             body + 
@@ -49,7 +57,7 @@ class MailSenderService {
                 from: `${this.config.smtpFromAddress} <${this.config.smtpFromName}>`,
                 to: email,
                 subject: subject,
-                text: body,
+                text: fullBody,
             });
 
         } catch (err) {

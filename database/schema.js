@@ -18,13 +18,8 @@ exports.blacklist = blacklist;
 
 const guilds = mysqlTable('guilds', {
     id: varchar('guild_id', 18).primaryKey(),
-    allowed: boolean('allowed'),
+    whitelisted: boolean('whitelisted').default(false),
+    verifiedRoleId: varchar('verified_role_id', 18),
+    unverifiedRoleId: varchar('unverified_role_id', 18),
 });
 exports.guilds = guilds;
-
-const guildRoles = mysqlTable('guild_roles', {
-    roleId: varchar('role_id', 18).primaryKey(),
-    guildId: varchar('guild_id', 18).references(() => guilds.id),
-    type: mysqlEnum('type', [ 'verified', 'unverified' ]),
-});
-exports.guildRoles = guildRoles;

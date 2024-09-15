@@ -5,6 +5,7 @@ const { z } = require('zod');
 
 const ConfigContextScheme = z.object({
     appName: z.string(),
+    appWebsite: z.string(),
     language: z.string(),
     blacklistEmail: z.string().email(),
 
