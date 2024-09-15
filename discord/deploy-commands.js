@@ -36,7 +36,7 @@ const rest = new REST().setToken(cfg.discordBotToken);
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 		const data = await rest.put(
-            Routes.applicationCommands(cfg.discordClientId),
+            Routes.applicationCommands(cfg.discrodClientId),
 			{ body: commands },
 		);
 

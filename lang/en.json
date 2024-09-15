@@ -35,11 +35,20 @@
                 "title": "/set_unverified_role",
                 "description": "Opens dropdown menu for selecting role which will be granted to unverified"
             }
+        },
+
+        "commands":{
+            "server_whitelist":{
+                "description" : "Allows server admin to whitelist server",
+                "descriptionAction" : "add/remove",
+                "descriptionServerId" : "server to perfrom action on" 
+            }
         }
     },
 
     "errors": {
-        "internalError": "Internal application error occurred"
+        "internalError": "Internal application error occurred",
+        "snowflakeError" : "Your input doesn't contain a valid snowflake"
     },
 
     "email": {
