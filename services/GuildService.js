@@ -48,9 +48,9 @@ class GuildService {
             .where(eq(guilds.id, guildId))
             .limit(1);
 
-        status.whitelisted = res.length > 0;
+        status.whitelisted = res.length > 0 && res[0].whitelisted;
 
-        if (!status.whitelisted)
+        if (res.length == 0)
             return status;
 
         status.verifiedRoleId = res[0].verifiedRoleId;
@@ -66,6 +66,7 @@ class GuildService {
      * @param {string | null} roleId
      */
     async setVerifiedRole(guildId, roleId) {
+        console.log('verrol', roleId);
         await this.dbctx.db.insert(this.dbctx.schema.guilds)
             .values({
                 id: guildId,
@@ -85,6 +86,7 @@ class GuildService {
      * @param {string | null} roleId
      */
     async setUnverifiedRole(guildId, roleId) {
+        console.log('uverrol', roleId);
         await this.dbctx.db.insert(this.dbctx.schema.guilds)
             .values({
                 id: guildId,
@@ -101,9 +103,10 @@ class GuildService {
      * Add/remove server from whitelist
      * 
      * @param {string} guildId
-     * @param {boolean} whitelisted
+     * @param {boolean} [whitelisted = true]
      */
-    async setWhitelisted(guildId, whitelisted) {
+    async setWhitelisted(guildId, whitelisted = true) {
+        console.log('WL', whitelisted);
         await this.dbctx.db.insert(this.dbctx.schema.guilds)
             .values({
                 id: guildId,

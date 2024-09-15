@@ -1,14 +1,14 @@
-const { defineConfig } = require('drizzle-kit');
 const { ConfigContext } = require('./contexts/ConfigContext.js');
 
-const cfg = ConfigContext.getInstance();
+const cfg = ConfigContext.getConfig();
 
-exports.default = defineConfig({
+/** @type { import('drizzle-kit').Config } */
+exports.default = {
     dialect: 'mysql',
     schema: './database/schema.js',
     out: './database/migrations',
     migrations: {
-        table: '_migrations',
+        table: 'migrations',
     },
     dbCredentials: {
         host: cfg.databaseHost,
@@ -17,4 +17,4 @@ exports.default = defineConfig({
         password: cfg.databasePassword,
         database: cfg.databaseName,
     },
-});
+};

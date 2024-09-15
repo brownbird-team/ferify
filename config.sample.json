@@ -24,7 +24,7 @@
     "supportEmail": "support@example.com",
 
     "databaseHost": "127.0.0.1",
-    "databasePort": 3066,
+    "databasePort": 3306,
     "databaseName": "ferify_db",
     "databaseUsername": "username",
     "databasePassword": "password",
