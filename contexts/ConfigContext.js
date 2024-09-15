@@ -22,8 +22,8 @@ class ConfigContext {
         const cfg = config || {};
 
         this.appName = cfg.appName || 'FERify';
+        this.appWebsite = cfg.appWebsite || 'ferify.example.com';
         this.language = cfg.language || 'en';
-        this.blacklistEmail = cfg.blacklistEmail || 'blacklist.ferify@example.com';
 
         if (!cfg.smtpHost || !cfg.smtpPort || !cfg.smtpUsername || !cfg.smtpPassword)
             console.warn('Incomplete SMTP configuration provided');

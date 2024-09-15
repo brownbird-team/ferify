@@ -1,7 +1,7 @@
 {
     "appName": "FERify",
+    "appWebsite": "https://ferify.example.com",
     "language": "en",
-    "blacklistEmail": "blacklist@example.com",
 
     "smtpHost": "smtp.example.com",
     "smtpPort": 587,
