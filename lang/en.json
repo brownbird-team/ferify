@@ -1,63 +1,77 @@
 {
-    "appTitle": "asdasdasdas",
-    "verifyEmail": [
-        "Hello {{emailAddress}},",
-        "This is your email: {{emailAddress}}",
-        "",
-        "Thank you for contacting us :)"
-    ],
-
     "discord": {
-        "title": "aaaa",
-        "nesto": "bbbb\n"
+        
     },
 
     "errors": {
         "internalError": "Internal application error occurred"
     },
 
-    "emails": {
-        "header": [
-            "Dear user,"
-        ],
+    "email": {
+        "subject": {
+            "unlocked": "Successfully unlocked",
+            "blacklisted": "Successfully blacklisted",
+            "unblacklisted": "Successfully removed from blacklist",
+            "verificationCode": "Verification code",
+            "invalidEmailAddress": "Request denied"
+        },
 
-        "unlocked": [
-            "Your email address <{{email}}> has been successfully unlocked.",
-            "This allows you to connect your email address to another discord account."
-        ],
-        "blacklisted": [
-            "Your email address <{{email}}> has been successfully blacklisted, you will not receive emails from {{appName}} discord bot ever again.",
-            "If you ever change your mind and you wish to remove your email from the blacklist, just send an email to <{{unblacklistAlias}}>."
-        ],
-        "unblacklisted": [
-            "You requested removal of your email address <{{email}}> from our blacklist, the requested action has been completed successfully."
-        ],
+        "body": {
+            "header": [
+                "Dear user,"
+            ],
 
-        "verificationCode": [
-            "A discord account requested to verify with your email address <{{email}}> your access code is:",
-            "",
-            "{{code}}",
-            "",
-            "If this was not you, you can safely ignore this email."
-        ],
-        "verificationSpamVerified": [
-            "Since you are a user of {{appName}} discord bot (your email hash is stored in our database), you can lock your account, this will prevent other users from spamming you by abusing our services.",
-            "To do this just use discord bot \"lock\" slash command, you can always unlock your account from discord or by sending email to <{{unlockAlias}}>."
-        ],
-        "verificationSpamUnknown": [
-            "In case you continue to receive this emails it means that someone is intentionally abusing our services and spamming your email address. To prevent this from happening you can always add your email address to our blacklist, you can do this by sending an email to <{{blacklistAlias}}> (email content is ignored)."
-        ],
+            "unlocked": [
+                "Your email address <{{email}}> has been successfully unlocked. ",
+                "This allows you to connect your email address to another discord account."
+            ],
+            "blacklisted": [
+                "Your email address <{{email}}> has been successfully blacklisted, ",
+                "you will not receive emails from {{appName}} discord bot ever again.\n",
+                "If you ever change your mind and you wish to remove your email from the ",
+                "blacklist, just send an email to <{{unblacklistAlias}}>."
+            ],
+            "unblacklisted": [
+                "You requested removal of your email address <{{email}}> from our blacklist, ",
+                "the requested action has been completed successfully."
+            ],
 
-        "invalidEmailAddress": [
-            "{{appName}} discord bot only accepts email addresses of certain format, your address {{email}} is not valid and thus the action you requested will not be performed."
-        ],
+            "verificationCode": [
+                "A discord account requested to verify with your email address <{{email}}> your access code is:\n",
+                "\n",
+                "{{code}}\n",
+                "\n",
+                "If this was not you, you can safely ignore this email."
+            ],
+            "verificationSpamVerified": [
+                "Since you are a user of {{appName}} discord bot (your email hash ",
+                "is stored in our database), you can lock your account, this will prevent ",
+                "other users from spamming you by abusing our services.\n",
+                "To do this just use discord bot \"lock\" slash command, you can always ",
+                "unlock your account from discord or by sending email to <{{unlockAlias}}>."
+            ],
+            "verificationSpamUnknown": [
+                "In case you continue to receive this emails it means that someone is ",
+                "intentionally abusing our services and spamming your email address. ",
+                "To prevent this from happening you can always add your email address to ",
+                "our blacklist, you can do this by sending an email to <{{blacklistAlias}}> ",
+                "(email content is ignored)."
+            ],
 
-        "footer": [
-            "This email has been sent by {{appName}} discord bot, you can find more information about it on our website {{website}}.",
-            "For any questions you can always contact us using our support email address <{{supportEmail}}>.",
-            "",
-            "Best regards,",
-            "forever yours {{appName}} discord bot :)"
-        ]
+            "invalidEmailAddress": [
+                "{{appName}} discord bot only accepts email addresses of certain format, ",
+                "your address {{email}} is not valid and thus the action you requested will ",
+                "not be performed."
+            ],
+
+            "footer": [
+                "This email has been sent by {{appName}} discord bot, you can find more ",
+                "information about it on our website {{website}}.\n",
+                "For any questions you can always contact us using our support email address <{{supportEmail}}>.\n",
+                "\n",
+                "Best regards,\n",
+                "forever yours {{appName}} discord bot :)"
+            ]
+        }
     }
 }

@@ -55,7 +55,7 @@ class TranslationContext {
 
                     // If value is array get all strings from array and join them
                     if (Array.isArray(value))
-                        map.set(itemPath, value.filter(chunk => typeof chunk == 'string').join('\n'));
+                        map.set(itemPath, value.filter(chunk => typeof chunk == 'string').join(''));
                 });
             }
 
