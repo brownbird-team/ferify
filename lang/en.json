@@ -6,13 +6,17 @@
                 "title": "/help",
                 "description": "Displays this message :)"
             },
-            "register":{
-                "title": "/register [email]",
+            "sendcode":{
+                "title": "/sendcode [email]",
                 "description": "Used to send verification code to users email"
             },
             "verify":{
                 "title": "/verify [code]",
                 "description": "Used to input verification code"
+            },
+            "purge":{
+                "title": "/purge",
+                "description": "Removes your verification"
             },
             "lock":{
                 "title": "/lock [on/off]",
@@ -27,13 +31,9 @@
                 "title": "/status",
                 "description": "Displays your verification status and lock info"
             },
-            "set_verified_role":{
-                "title": "/set_verified_role",
-                "description": "Opens dropdown menu for selecting role which will be granted to verified users"
-            },
-            "set_unverified_role":{
-                "title": "/set_unverified_role",
-                "description": "Opens dropdown menu for selecting role which will be granted to unverified"
+            "set_role":{
+                "title": "/set_role [verified/unverified] [roleId]",
+                "description": "Used by admins to set role which will be granted to verified and unverified users"
             }
         },
 
