@@ -9,7 +9,7 @@ const t = tctx.getGlobalTranslator();
 
 const defaultEmbed = async (title, description, color) =>{
     const embed = new EmbedBuilder()
-                .setColor(cfg.discordColors.success) // Add color
+                .setColor(color) // Add color
                 .setTitle(title)
                 .setDescription(description)
     return embed

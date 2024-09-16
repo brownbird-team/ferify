@@ -41,14 +41,20 @@
             "server_whitelist":{
                 "description" : "Allows server admin to whitelist server",
                 "descriptionAction" : "add/remove",
-                "descriptionServerId" : "server to perfrom action on" 
+                "descriptionServerId" : "server to perfrom action on" ,
+                "serverAddedSuccessfully": "Server added to whitelist",
+                "serverRemovedSuccessfully": "Server removed from whitelist"
             }
         }
     },
 
     "errors": {
         "internalError": "Internal application error occurred",
-        "snowflakeError" : "Your input doesn't contain a valid snowflake"
+        "snowflakeError" : "Your input doesn't contain a valid snowflake",
+        "discordWhitelistErrors":{
+            "alreadyWhitelisted" : "This server is already whitelisted",
+            "alreadyUnWhitelisted": "This server is already unwhitelisted" 
+        }
     },
 
     "email": {
