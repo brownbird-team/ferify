@@ -39,11 +39,32 @@
 
         "commands":{
             "server_whitelist":{
-                "description" : "Allows server admin to whitelist server",
+                "description" : "Allows application admin to whitelist server",
                 "descriptionAction" : "add/remove",
                 "descriptionServerId" : "server to perfrom action on" ,
                 "serverAddedSuccessfully": "Server added to whitelist",
                 "serverRemovedSuccessfully": "Server removed from whitelist"
+            },
+            "set_role":{
+                "description" : "Used by admins to set role which will be granted to verified and unverified users",
+                "descriptionAction" : "verified/unverified",
+                "descriptionRoleId" : "role to select" ,
+                "messages": {
+                    "verified":"{{role}} is now verified role",
+                    "unverified":"{{role}} is now unverified role"
+                }
+            },
+            "server_status":{
+                "description" : "Used by server admins to check server status",
+                "embed":{
+                    "title" : "{{serverName}} status",
+                    "description" : [
+                        "Whitelist : [{{whitelistStatus}}]\n",
+                        "{{verifiedRole}} : [{{verifiedRoleStatus}}]\n",
+                        "{{unverifiedRole}} : [{{unverifiedRoleStatus}}]\n",
+                        "Working [{{serverStatus}}]"
+                    ] 
+                }
             }
         }
     },

@@ -9,7 +9,7 @@ const t = tctx.getGlobalTranslator();
 
 const defaultEmbed = async (title, description, color) =>{
     const embed = new EmbedBuilder()
-                .setColor(color) // Add color
+                .setColor(color) 
                 .setTitle(title)
                 .setDescription(description)
     return embed
@@ -33,6 +33,24 @@ const helpEmbed = async(commands) =>{
 }
 
 
+/**
+ * 
+ * @param {*} data 
+ */
+const serverStatusEmbed = async(data) =>{
+    const embed = new EmbedBuilder()
+                .setTitle("Serv")
+                .setColor(data.serverStatus ? cfg.discordColors.success : cfg.discordColors.error)
+                .setTitle(t('discord.commands.server_status.embed.title', {serverName : data.serverName}))
+                .setDescription(t(
+                    'discord.commands.server_status.embed.description',
+                    data
+                ))
+    return embed                
+}
+
+
+
 exports.defaultEmbed = defaultEmbed
 exports.helpEmbed = helpEmbed
-
+exports.serverStatusEmbed = serverStatusEmbed

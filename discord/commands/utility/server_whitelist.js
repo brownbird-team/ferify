@@ -20,7 +20,13 @@ module.exports = {
         .setDescription(t("discord.commands.server_whitelist.description"))
         .addStringOption(option =>
             option.setName('action')
-                
+                .setDescription(t("discord.commands.server_whitelist.descriptionAction"))
+
+                .setRequired(true)
+                .addChoices(
+                    {name : 'add', value: 'add'},
+                    {name : 'remove', value: 'remove'}
+                )
         )
         .addStringOption(option =>
             option.setName('server_id')
