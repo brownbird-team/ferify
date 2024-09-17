@@ -14,14 +14,14 @@ const { DatabaseContext } = require('../contexts/DatabaseContext.js');
 
 class GuildService {
 
-    /** @type {DatabaseContext} */
+    /** @private @type {DatabaseContext} */
     dbctx;
     
     /**
-     * @param {DatabaseContext} databaseCtx
+     * @param {DatabaseContext} databaseContext
      */
-    constructor(databaseCtx) {
-        this.dbctx = databaseCtx;
+    constructor(databaseContext) {
+        this.dbctx = databaseContext;
     }
 
     /**

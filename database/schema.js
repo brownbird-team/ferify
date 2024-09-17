@@ -1,5 +1,6 @@
 // @ts-check
 
+const { UserSelectMenuBuilder } = require('discord.js');
 const { varchar, mysqlTable, boolean, datetime, bigint } = require('drizzle-orm/mysql-core');
 
 const users = mysqlTable('users', {
@@ -12,6 +13,10 @@ const users = mysqlTable('users', {
 });
 exports.users = users;
 
+/**
+ * @typedef {typeof users.$inferSelect} UserRecord
+ */
+
 const blacklist = mysqlTable('blacklist', {
     id: bigint('id', { mode: 'bigint', unsigned: true }).primaryKey(),
     emailHash: varchar('email_hash', { length: 2048 }).notNull().unique(),
@@ -20,6 +25,10 @@ const blacklist = mysqlTable('blacklist', {
 });
 exports.blacklist = blacklist;
 
+/**
+ * @typedef {typeof blacklist.$inferSelect} BlacklistRecord
+ */
+
 const guilds = mysqlTable('guilds', {
     id: varchar('guild_id', { length: 20 }).primaryKey(),
     whitelisted: boolean('whitelisted').notNull().default(false),
@@ -27,3 +36,7 @@ const guilds = mysqlTable('guilds', {
     unverifiedRoleId: varchar('unverified_role_id', { length: 20 }),
 });
 exports.guilds = guilds;
+
+/**
+ * @typedef {typeof guilds.$inferSelect} GuildRecord
+ */

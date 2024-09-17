@@ -40,6 +40,8 @@ const ConfigContextScheme = z.object({
     databaseName: z.string(),
     databaseUsername: z.string(),
     databasePassword: z.string(),
+
+    hashPepper: z.string(),
   
     admins: z.array(z.string()),
   
@@ -70,28 +72,6 @@ class ConfigContext {
     /** @type {Config} */
     config;
 
-    /**
-     * Return ConfigContext global instance
-     * 
-     * @returns {ConfigContext}
-     */
-    static getInstance() {
-        if (ConfigContext.instance)
-            return ConfigContext.instance;
-
-        ConfigContext.instance = new ConfigContext();
-        return ConfigContext.instance;
-    }
-
-    /**
-     * Return config object stored in ConfigContext global instance
-     * 
-     * @returns {Config}
-     */
-    static getConfig() {
-        return ConfigContext.getInstance().config;
-    }
-
     constructor() {
         try {
             this.config = ConfigContextScheme.parse(config)
@@ -112,5 +92,5 @@ class ConfigContext {
         }
     }
 }
-ConfigContext.getInstance()
+
 exports.ConfigContext = ConfigContext;

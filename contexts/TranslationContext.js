@@ -25,24 +25,10 @@ class TranslationContext {
     config;
 
     /**
-     * Return TranslationContext global instanc
-     * @returns {TranslationContext}
+     * @param {ConfigContext} configContext
      */
-    static getInstance() {
-        if (TranslationContext.instance)
-            return TranslationContext.instance;
-
-        const config = ConfigContext.getConfig();
-
-        TranslationContext.instance = new TranslationContext(config);
-        return TranslationContext.instance;
-    }
-
-    /**
-     * @param {Config} config
-     */
-    constructor(config) {
-        this.config = config;
+    constructor(configContext) {
+        this.config = configContext.config;
 
         const translationObjects = new Map();
         const languageDir = path.resolve(__dirname + '/../lang/');

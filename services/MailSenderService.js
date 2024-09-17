@@ -2,31 +2,32 @@
 
 const nodemailer = require('nodemailer');
 const { TranslationContext } = require('../contexts/TranslationContext.js');
+const { ConfigContext } = require('../contexts/ConfigContext.js');
 
 /** @typedef {import('../contexts/ConfigContext.js').Config} Config */
 
 class MailSenderService {
 
-    /** @type {Config} */
+    /** @private @type {Config} */
     config;
-    /** @type {TranslationContext} */
+    /** @private @type {TranslationContext} */
     translation;
 
     /**
-     * @param {Config} config
-     * @param {TranslationContext} translationCtx
+     * @param {ConfigContext} configContext
+     * @param {TranslationContext} translationContext
      */
-    constructor(config, translationCtx) {
-        this.config = config;
-        this.translation = translationCtx;
+    constructor(configContext, translationContext) {
+        this.config = configContext.config;
+        this.translation = translationContext;
 
         this.transporter = nodemailer.createTransport({
-            host: config.smtpHost,
-            port: config.smtpPort,
-            secure: config.smtpPort == 465,
+            host: this.config.smtpHost,
+            port: this.config.smtpPort,
+            secure: this.config.smtpPort == 465,
             auth: {
-                user: config.smtpUsername,
-                pass: config.smtpPassword,
+                user: this.config.smtpUsername,
+                pass: this.config.smtpPassword,
             },
         });
     }
@@ -54,7 +55,7 @@ class MailSenderService {
 
         try {
             await this.transporter.sendMail({
-                from: `${this.config.smtpFromAddress} <${this.config.smtpFromName}>`,
+                from: `${this.config.smtpFromName} <${this.config.smtpFromAddress}>`,
                 to: email,
                 subject: subject,
                 text: fullBody,

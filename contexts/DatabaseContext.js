@@ -20,33 +20,22 @@ class DatabaseContext {
     db;
 
     /**
-     * Return DatabaseContext global instance
-     * @returns {DatabaseContext}
+     * @param {ConfigContext} configContext
      */
-    static getInstance() {
-        if (DatabaseContext.instance)
-            return DatabaseContext.instance;
+    constructor(configContext) {
+        const cfg = configContext.config;
 
-        const config = ConfigContext.getConfig();
-
-        DatabaseContext.instance = new DatabaseContext(config);
-        return DatabaseContext.instance;
-    }
-
-    /**
-     * @param {Config} config
-     */
-    constructor(config) {
         const pool = mysql.createPool({
-            host: config.databaseHost,
-            port: config.databasePort,
-            user: config.databaseUsername,
-            password: config.databasePassword,
-            database: config.databaseName,
+            host: cfg.databaseHost,
+            port: cfg.databasePort,
+            user: cfg.databaseUsername,
+            password: cfg.databasePassword,
+            database: cfg.databaseName,
         });
 
         this.db = drizzle(pool);
         this.schema = schema;
+        this.config = cfg;
     }
 }
 
