@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction, discordSort } = require('discord.js');
-const { ConfigContext } = require('../../../contexts/ConfigContext.js')
-const { TranslationContext } = require("../../../contexts/TranslationContext.js")
-const { GuildService } = require('../../../services/GuildService.js')
-const { DatabaseContext } = require('../../../contexts/DatabaseContext.js')
-const { defaultEmbed } = require('../embeds/embeds.js')
+const { ConfigContext } = require('@contexts/ConfigContext.js')
+const { TranslationContext } = require("@contexts/TranslationContext.js")
+const { GuildService } = require('@services/GuildService.js')
+const { DatabaseContext } = require('@contexts/DatabaseContext.js')
+const { defaultEmbed } = require('@discord-embeds/embeds.js')
 
 
 const tctx = TranslationContext.getInstance();

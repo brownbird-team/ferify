@@ -1,6 +1,6 @@
 const {EmbedBuilder, inlineCode} = require('discord.js')
-const {ConfigContext} = require('../../../contexts/ConfigContext.js')
-const {TranslationContext} = require("../../../contexts/TranslationContext.js")
+const {ConfigContext} = require('@contexts/ConfigContext.js')
+const {TranslationContext} = require("@contexts/TranslationContext.js")
 
 const cfg = ConfigContext.getConfig()
 

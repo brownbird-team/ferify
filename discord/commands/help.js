@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js')
-const {helpEmbed} = require('../embeds/embeds.js')
-const {ConfigContext} = require('../../../contexts/ConfigContext.js')
+const {helpEmbed} = require('@discord-embeds/embeds.js')
+const {ConfigContext} = require('@contexts/ConfigContext.js')
 
 const cfg = ConfigContext.getConfig()
 

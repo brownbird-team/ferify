@@ -14,6 +14,7 @@
     "discord.js": "^14.16.1",
     "drizzle-orm": "^0.33.0",
     "imapflow": "^1.0.164",
+    "module-alias": "^2.2.3",
     "mysql2": "^3.11.2",
     "nodemailer": "^6.9.15",
     "zod": "^3.23.8"
@@ -21,5 +22,14 @@
   "devDependencies": {
     "drizzle-kit": "^0.24.2",
     "vitest": "^2.0.5"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@contexts": "contexts",
+    "@services": "services",
+    "@utils" : "utils",
+    "@discord" : "discord",
+    "@discord-commands" : "discord/commands",
+    "@discord-embeds" : "discord/embeds" 
   }
 }

@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits  } = require('discord.js');
-const { ConfigContext } = require('../../../contexts/ConfigContext.js')
-const { TranslationContext } = require("../../../contexts/TranslationContext.js")
-const { GuildService } = require('../../../services/GuildService.js')
-const { DatabaseContext } = require('../../../contexts/DatabaseContext.js')
-const { serverStatusEmbed } = require('../embeds/embeds.js');
+const { ConfigContext } = require('@contexts/ConfigContext.js')
+const { TranslationContext } = require("@contexts/TranslationContext.js")
+const { GuildService } = require('@services/GuildService.js')
+const { DatabaseContext } = require('@contexts/DatabaseContext.js')
+const { serverStatusEmbed } = require('@discord-embeds/embeds.js');
 
 
 
