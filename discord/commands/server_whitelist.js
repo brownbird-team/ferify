@@ -3,15 +3,14 @@ const { ConfigContext } = require('@contexts/ConfigContext.js')
 const { TranslationContext } = require("@contexts/TranslationContext.js")
 const { GuildService } = require('@services/GuildService.js')
 const { DatabaseContext } = require('@contexts/DatabaseContext.js')
-const { defaultEmbed } = require('@discord-embeds/embeds.js')
+const { DiscordEmbeds } = require('@discord-embeds/embeds.js')
+const {InputUtils} = require('@discord-utils/inputUtils.js')
+const container = require('@root/container.js')
 
+const cfg = container.resolve(ConfigContext).config
+const t = container.resolve(TranslationContext).getGlobalTranslator()
 
-const tctx = TranslationContext.getInstance();
-const t = tctx.getGlobalTranslator();
-
-const cfg = ConfigContext.getConfig()
-
-const guildService = new GuildService(DatabaseContext.getInstance())
+const guildService = container.resolve(GuildService)
 
 
 module.exports = {
@@ -47,7 +46,7 @@ module.exports = {
             return;
         }
 
-        if (!checkSnowflake(serverId)) {
+        if (!await InputUtils.checkSnowflake(serverId)) {
             await interaction.reply(t('errors.snowflakeError'));
             return;
         }
@@ -58,7 +57,7 @@ module.exports = {
                 if (serverInfo.whitelisted) {
                     await interaction.reply({
                         embeds: [
-                            await defaultEmbed(
+                            await DiscordEmbeds.defaultEmbed(
                                 t("errors.discordWhitelistErrors.alreadyWhitelisted"),
                                 null,
                                 cfg.discordColors.error
@@ -69,7 +68,7 @@ module.exports = {
 
                 await guildService.setWhitelisted(serverId, true)
 
-                const addEmbed = await defaultEmbed(t("discord.commands.server_whitelist.serverAddedSuccessfully"), null, cfg.discordColors.success)
+                const addEmbed = await DiscordEmbeds.defaultEmbed(t("discord.commands.server_whitelist.serverAddedSuccessfully"), null, cfg.discordColors.success)
 
                 await interaction.reply({ embeds: [addEmbed] });
 
@@ -79,7 +78,7 @@ module.exports = {
                 if (!serverInfo.whitelisted) {
                     await interaction.reply({
                         embeds: [
-                            await defaultEmbed(
+                            await DiscordEmbeds.defaultEmbed(
                                 t("errors.discordWhitelistErrors.alreadyUnWhitelisted"),
                                 null,
                                 cfg.discordColors.error
@@ -90,7 +89,7 @@ module.exports = {
 
                 await guildService.setWhitelisted(serverId, false)
 
-                const removedEmbed = await defaultEmbed(t("discord.commands.server_whitelist.serverRemovedSuccessfully"), null, cfg.discordColors.success)
+                const removedEmbed = await DiscordEmbeds.defaultEmbed(t("discord.commands.server_whitelist.serverRemovedSuccessfully"), null, cfg.discordColors.success)
 
                 await interaction.reply({ embeds: [removedEmbed] });
 
@@ -100,11 +99,4 @@ module.exports = {
     },
 };
 
-const snowflakeRegex = /^\d{17,19}$/;
-/**
- * Checks if string is valid snowflake
- * @param {string} snowflake 
- * @returns {boolean} 
- */
-const checkSnowflake = (snowflake) => snowflakeRegex.test(snowflake)
 

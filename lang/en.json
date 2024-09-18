@@ -50,8 +50,14 @@
                 "descriptionAction" : "verified/unverified",
                 "descriptionRoleId" : "role to select" ,
                 "messages": {
-                    "verified":"{{role}} is now verified role",
-                    "unverified":"{{role}} is now unverified role"
+                    "add":{
+                        "verified":"{{role}} is now verified role",
+                        "unverified":"{{role}} is now unverified role"
+                    },
+                    "remove":{
+                        "verified":"Verified role removed",
+                        "unverified":"Unverified role removed"
+                    }	
                 }
             },
             "server_status":{

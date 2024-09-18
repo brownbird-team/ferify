@@ -1,11 +1,12 @@
 require('module-alias/register')
-
 const { REST, Routes } = require('discord.js');
-const { ConfigContext} = require('../contexts/ConfigContext.js');
 const fs = require('node:fs');
+const container = require('@root/container.js')
+ 
 const path = require('node:path');
+const { ConfigContext } = require('@root/contexts/ConfigContext.js');
 
-const cfg = ConfigContext.getConfig()
+const cfg = container.resolve(ConfigContext).config
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));

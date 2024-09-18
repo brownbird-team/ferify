@@ -13,7 +13,8 @@
       "@utils/*": ["utils/*"],
       "@discord/*": ["discord/*"],
       "@discord-commands/*": ["discord/commands/*"],
-      "@discord-embeds/*": ["discord/embeds/*"]
+      "@discord-embeds/*": ["discord/embeds/*"],
+      "@discord-utils/*" : ["discord/utils/*"]
     }
   },
 

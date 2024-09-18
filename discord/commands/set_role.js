@@ -3,16 +3,14 @@ const { ConfigContext } = require('@contexts/ConfigContext.js')
 const { TranslationContext } = require("@contexts/TranslationContext.js")
 const { GuildService } = require('@services/GuildService.js')
 const { DatabaseContext } = require('@contexts/DatabaseContext.js')
-const { defaultEmbed } = require('@discord-embeds/embeds.js');
+const { DiscordEmbeds } = require('@discord-embeds/embeds.js');
 
+const container = require('@root/container.js')
 
+const cfg = container.resolve(ConfigContext).config
+const t = container.resolve(TranslationContext).getGlobalTranslator()
 
-const tctx = TranslationContext.getInstance();
-const t = tctx.getGlobalTranslator();
-
-const cfg = ConfigContext.getConfig()
-
-const guildService = new GuildService(DatabaseContext.getInstance())
+const guildService = container.resolve(GuildService)
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -31,7 +29,6 @@ module.exports = {
         .addRoleOption(option =>
             option.setName("role")
             .setDescription(t('discord.commands.set_role.descriptionRoleId'))
-            .setRequired(true)
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         ,
@@ -42,30 +39,28 @@ module.exports = {
         async execute(interaction) {
             const action = await interaction.options.getString("action")
             const role = await interaction.options.getRole("role")
+            
+            let subaction = role === null ? "remove" : "add";
+            let roleId = role?.id.toString() || null;
+
+
             switch(action){
                 case "verified":
-                    guildService.setVerifiedRole(interaction.guildId, role.id.toString())
-                    await interaction.reply({
-                        embeds: [
-                            await defaultEmbed(
-                                t("discord.commands.set_role.messages.verified",{role:role.name}),
-                                null,
-                                cfg.discordColors.success
-                            )]
-                    });
+                    guildService.setVerifiedRole(interaction.guildId, roleId)
                     break;
                 
                 case "unverified":
-                    guildService.setUnverifiedRole(interaction.guildId, role.id.toString())
-                    await interaction.reply({
-                        embeds: [
-                            await defaultEmbed(
-                                t("discord.commands.set_role.messages.unverified",{role:role.name}),
-                                null,
-                                cfg.discordColors.success
-                            )]
-                    });
+                    guildService.setUnverifiedRole(interaction.guildId, roleId)
                     break;
             }
+
+            await interaction.reply({
+                embeds: [
+                    await DiscordEmbeds.defaultEmbed(
+                        t(`discord.commands.set_role.messages.${subaction}.${action}`,{role:role?.name}),
+                        null,
+                        cfg.discordColors.success
+                    )]
+            });
         }
     }           

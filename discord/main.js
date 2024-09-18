@@ -1,12 +1,13 @@
 require('module-alias/register')
-
-
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { ConfigContext } = require('@contexts/ConfigContext');
+const container = require('@root/container.js')
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
 
-const { ConfigContext } = require('@contexts/ConfigContext');
-const cfg = ConfigContext.getConfig()
+
+
+const cfg = container.resolve(ConfigContext).config
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
