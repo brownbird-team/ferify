@@ -45,6 +45,10 @@ class TranslationContext {
         translationObjects.forEach((value, key) => {
             const map = new Map();
 
+            /**
+             * @param {string} parentPath 
+             * @param {any} obj
+             */
             const iterate = (parentPath, obj) => {
                 Object.entries(obj).forEach(([ key, value ]) => {
                     const itemPath = parentPath.length > 0 ? parentPath + '.' + key : key;
@@ -131,7 +135,7 @@ exports.TranslationContext = TranslationContext;
 /**
  * USAGE:
  * 
- * const tctx = TranslationContext.getInstance();
+ * const tctx = new TranslationContext(configContext);
  * const t = tctx.getGlobalTranslator();
  * 
  * console.log(t('verifyEmail', { emailAddress: 'r@r.com' }))

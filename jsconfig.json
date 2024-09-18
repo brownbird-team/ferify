@@ -1,18 +1,23 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@root/*": ["./*"],
-        "@contexts/*": ["contexts/*"],
-        "@services/*": ["services/*"],
-        "@utils/*": ["utils/*"],
-        "@discord/*": ["discord/*"],
-        "@discord-commands/*": ["discord/commands/*"],
-        "@discord-embeds/*": ["discord/embeds/*"]
-      }
-    },
-    "include": [
-      "./**/*"
-    ]
-  }
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2015",
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    
+    "paths": {
+      "@root/*": ["./*"],
+      "@contexts/*": ["contexts/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"],
+      "@discord/*": ["discord/*"],
+      "@discord-commands/*": ["discord/commands/*"],
+      "@discord-embeds/*": ["discord/embeds/*"]
+    }
+  },
+
+  "include": [ "./**/*" ],
+  "exclude": [ "node_modules" ]
+}
   

@@ -1,6 +1,5 @@
 // @ts-check
 
-const { UserSelectMenuBuilder } = require('discord.js');
 const { varchar, mysqlTable, boolean, datetime, bigint } = require('drizzle-orm/mysql-core');
 
 const users = mysqlTable('users', {

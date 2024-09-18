@@ -6,6 +6,7 @@ const { TranslationContext } = require('../contexts/TranslationContext.js');
 const { eq } = require('drizzle-orm');
 const { ConfigContext } = require('../contexts/ConfigContext.js');
 const { MailSenderService } = require('./MailSenderService.js');
+const { CryptoService } = require('./CryptoService.js');
 
 /** @typedef {import('../contexts/ConfigContext.js').Config} Config */
 /** @typedef {import('../database/schema.js').UserRecord} UserRecord */
@@ -28,18 +29,22 @@ class UserService {
     translation;
     /** @private @type {MailSenderService} */
     sender;
+    /** @private @type {CryptoService} */
+    crypto;
 
     /**
      * @param {ConfigContext} configContext
      * @param {DatabaseContext} databaseContext
      * @param {TranslationContext} translationContext
      * @param {MailSenderService} mailSenderService
+     * @param {CryptoService} cryptoService
      */
-    constructor(configContext, databaseContext, translationContext, mailSenderService) {
+    constructor(configContext, databaseContext, translationContext, mailSenderService, cryptoService) {
         this.config = configContext.config;
         this.translation = translationContext;
         this.dbctx = databaseContext;
         this.sender = mailSenderService;
+        this.crypto = cryptoService;
     }
 
     /**
@@ -127,9 +132,16 @@ class UserService {
      * @param {string} email 
      */
     async sendCode(userId, email) {
+        const { db } = this.dbctx;
+        const { users } = this.dbctx.schema;
+        const t = this.translation.getGlobalTranslator();
+
         const user = await this.fetchUserById(userId);
 
+        if (user?.verified)
+            throw new UserError(t('errors.alreadyVerified'));
 
+        
     }
 
     /**

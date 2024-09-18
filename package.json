@@ -27,9 +27,9 @@
     "@root": ".",
     "@contexts": "contexts",
     "@services": "services",
-    "@utils" : "utils",
-    "@discord" : "discord",
-    "@discord-commands" : "discord/commands",
-    "@discord-embeds" : "discord/embeds" 
+    "@utils": "utils",
+    "@discord": "discord",
+    "@discord-commands": "discord/commands",
+    "@discord-embeds": "discord/embeds"
   }
 }

@@ -66,7 +66,6 @@ class GuildService {
      * @param {string | null} roleId
      */
     async setVerifiedRole(guildId, roleId) {
-        console.log('verrol', roleId);
         await this.dbctx.db.insert(this.dbctx.schema.guilds)
             .values({
                 id: guildId,
@@ -86,7 +85,6 @@ class GuildService {
      * @param {string | null} roleId
      */
     async setUnverifiedRole(guildId, roleId) {
-        console.log('uverrol', roleId);
         await this.dbctx.db.insert(this.dbctx.schema.guilds)
             .values({
                 id: guildId,

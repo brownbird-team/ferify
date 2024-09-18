@@ -70,8 +70,11 @@
     },
 
     "errors": {
+        "alreadyVerified": "You are already verified, purge your account to do it again",
+
         "internalError": "Internal application error occurred",
         "snowflakeError" : "Your input doesn't contain a valid snowflake",
+
         "discordWhitelistErrors":{
             "alreadyWhitelisted" : "This server is already whitelisted",
             "alreadyUnWhitelisted": "This server is already unwhitelisted" 
