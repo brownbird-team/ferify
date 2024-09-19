@@ -1,3 +1,4 @@
+const container = require('./../container.js');
 const { TranslationContext } = require('../contexts/TranslationContext.js');
 
 /**
@@ -12,7 +13,7 @@ exports.toUserError = (err) => {
     if (err && err.isUserError)
         return err.message;
 
-    const t = TranslationContext.getInstance().getGlobalTranslator();
+    const t = container.resolve(TranslationContext).getGlobalTranslator();
     console.error(err);
 
     return t('errors.internalError');
