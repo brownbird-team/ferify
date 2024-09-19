@@ -1,6 +1,7 @@
+const container = require('./container.js');
 const { ConfigContext } = require('./contexts/ConfigContext.js');
 
-const cfg = ConfigContext.getConfig();
+const cfg = container.resolve(ConfigContext).config;
 
 /** @type { import('drizzle-kit').Config } */
 exports.default = {
