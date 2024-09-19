@@ -4,10 +4,23 @@ const config = require('../config.json');
 const { z } = require('zod');
 
 const hexColorRegex = /^#([0-9a-f]{3}){1,2}$/i;
+
 /**
  * @param {string} value
+ * @returns {boolean}
  */
 const checkHexColor = (value) => hexColorRegex.test(value)
+
+/**
+ * @param {string} value
+ * @returns {boolean}
+ */
+const checkRegex = (value) => {
+    try { RegExp(value); } 
+    catch { return false; }
+    
+    return true;
+}
 
 const ConfigContextScheme = z.object({
     appName: z.string(),
@@ -42,6 +55,11 @@ const ConfigContextScheme = z.object({
     databasePassword: z.string(),
 
     hashPepper: z.string(),
+    verificationCodeValidSeconds: z.number(),
+
+    emailRegex: z.string()
+        .refine(checkRegex, 'Invalid regex')
+        .transform(str => RegExp(str, 'i')),
   
     admins: z.array(z.string()),
   
@@ -63,12 +81,10 @@ const ConfigContextScheme = z.object({
 });
 
 /** 
- * @typedef { z.infer<typeof ConfigContextScheme>} Config 
+ * @typedef { z.infer<typeof ConfigContextScheme> } Config 
  */
 
 class ConfigContext {
-    /** @type {ConfigContext | null} */
-    static instance = null;
 
     /** @type {Config} */
     config;

@@ -1,5 +1,7 @@
 config.json
-config.test.json
+config.*.json
+!config.sample.json
+
 node_modules
 
 **/__test*

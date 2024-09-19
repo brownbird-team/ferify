@@ -160,6 +160,38 @@ class MailSenderService {
             })
         );
     }
+
+    /**
+     * Send response which indicates that unblacklist request
+     * is denied since email is added to blacklist permanently
+     * 
+     * @param {string} email 
+     */
+    async sendUnblacklistDenied(email) {
+        const t = this.translation.getGlobalTranslator();
+
+        await this.sendMail(email, 
+            t('email.subject.unblacklistDenied'),
+            t('email.body.unblacklistDenied')
+        );
+    }
+
+    /**
+     * Send response which indicates an error occurred
+     * 
+     * @param {string} email
+     * @param {string} errorDescription
+     */
+    async sendErrorResponse(email, errorDescription) {
+        const t = this.translation.getGlobalTranslator();
+
+        await this.sendMail(email, 
+            t('email.subject.errorResponse'),
+            t('email.body.errorResponse', {
+                description: errorDescription,
+            })
+        );
+    }
 }
 
 exports.MailSenderService = MailSenderService;

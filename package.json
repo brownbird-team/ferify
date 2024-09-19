@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "db:migrate": "drizzle-kit migrate",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "author": "BrownBird Team",
   "license": "MIT",
@@ -21,7 +23,7 @@
   },
   "devDependencies": {
     "drizzle-kit": "^0.24.2",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.1"
   },
   "_moduleAliases": {
     "@root": ".",

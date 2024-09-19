@@ -9,9 +9,7 @@ const { ConfigContext } = require('./ConfigContext.js');
 /** @typedef {import('./ConfigContext.js').Config} Config */
 
 class DatabaseContext {
-    /** @type { DatabaseContext | null } */
-    static instance = null;
-
+    
     /** @type {Config} */
     config;
     /** @type {typeof schema} */

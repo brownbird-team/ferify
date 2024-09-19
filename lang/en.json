@@ -76,6 +76,23 @@
 
     "errors": {
         "alreadyVerified": "You are already verified, purge your account to do it again",
+        "noVerificationCode": "You must send yourself verification code before you can be verified",
+        "verificationCodeExpired": "Your verification code expired, please send another one",
+        "invalidVerificationCode": "Given verification code is invalid",
+        "emailLocked": [
+            "This email address is locked, if this is your email address and you want to transfer ",
+            "it to this discord account, you can unlock it by using slash command on another discord ",
+            "account or by sending an email to {{unlockAlias}}"
+        ],
+        "emailBlacklisted": "This email address is blacklisted, you can remove it from blacklist by sending an email to {{unblacklistAlias}}",
+        "verificationRequired": "You must be verified to perform this action",
+
+        "alreadyLocked": "This account is already locked",
+        "alreadyUnlocked": "This account is already unlocked",
+        "alreadyPurged": "This account is not in bot database, nothing to purge",
+        "alreadyBlacklisted": "This email address is already blacklisted",
+
+        "emailInvalid": "This email address is invalid",
 
         "internalError": "Internal application error occurred",
         "snowflakeError" : "Your input doesn't contain a valid snowflake",
@@ -93,7 +110,8 @@
             "unblacklisted": "Successfully removed from blacklist",
             "verificationCode": "Verification code",
             "invalidEmailAddress": "Request denied",
-            "unblacklistDenied": "Failed to fulfil your request"
+            "unblacklistDenied": "Failed to fulfil your request",
+            "errorResponse": "Something went wrong"
         },
 
         "body": {
@@ -117,10 +135,10 @@
             ],
 
             "verificationCode": [
-                "A discord account requested to verify with your email address <{{email}}> your access code is:\n",
-                "\n",
+                "A discord account requested to verify with your email address <{{email}}> your access code is:\n\n",
+                "===========\n",
                 "{{code}}\n",
-                "\n",
+                "===========\n\n",
                 "If this was not you, you can safely ignore this email."
             ],
             "verificationSpamVerified": [
@@ -146,6 +164,11 @@
 
             "unblacklistDenied": [
                 "Something went wrong, please try again later..."
+            ],
+
+            "errorResponse": [
+                "Failed to fulfil your request with error:\n",
+                "{{description}}"
             ],
 
             "footer": [

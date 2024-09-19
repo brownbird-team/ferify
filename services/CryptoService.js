@@ -55,6 +55,16 @@ class CryptoService {
 
         return code.slice(0, VERIFY_CODE_LEN).toUpperCase();
     }
+
+    /**
+     * Check if given email is valid
+     * 
+     * @param {string} email
+     * @returns {boolean}
+     */
+    checkEmail(email) {
+        return this.config.emailRegex.test(email);
+    }
 }
 
 exports.CryptoService = CryptoService;

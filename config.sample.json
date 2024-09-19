@@ -30,6 +30,9 @@
     "databasePassword": "password",
 
     "hashPepper": "YOUR_LONG_RANDOMLY_GENERATED_STRING",
+    "verificationCodeValidSeconds": 900,
+
+    "emailRegex": "[a-z.]@brownbird\\.eu",
 
     "admins": [ 
         "YOUR_DISCORD_USER_ID"

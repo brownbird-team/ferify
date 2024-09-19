@@ -4,11 +4,11 @@ const { varchar, mysqlTable, boolean, datetime, bigint } = require('drizzle-orm/
 
 const users = mysqlTable('users', {
     id: varchar('user_id', { length: 20 }).primaryKey(),
-    emailHash: varchar('email_hash', { length: 2048 }).notNull().unique(),
+    emailHash: varchar('email_hash', { length: 2048 }).notNull(),
     locked: boolean('locked').notNull().default(false),
     verified: boolean('verified').notNull().default(false),
     code: varchar('code', { length: 2048 }),
-    codeCreated: datetime('code_created'),
+    codeCreated: datetime('code_created', { mode: 'date' }),
 });
 exports.users = users;
 
@@ -17,7 +17,7 @@ exports.users = users;
  */
 
 const blacklist = mysqlTable('blacklist', {
-    id: bigint('id', { mode: 'bigint', unsigned: true }).primaryKey(),
+    id: bigint('id', { mode: 'bigint', unsigned: true }).primaryKey().autoincrement(),
     emailHash: varchar('email_hash', { length: 2048 }).notNull().unique(),
     permanent: boolean('locked').notNull().default(false),
     blacklisted: boolean('blacklisted').notNull().default(true),

@@ -18,8 +18,6 @@ const { ConfigContext } = require('./ConfigContext.js')
  */ 
 
 class TranslationContext {
-    /** @type {TranslationContext | null} */
-    static instance = null;
 
     /** @type {Config} */
     config;
