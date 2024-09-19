@@ -104,7 +104,6 @@ class GuildService {
      * @param {boolean} [whitelisted = true]
      */
     async setWhitelisted(guildId, whitelisted = true) {
-        console.log('WL', whitelisted);
         await this.dbctx.db.insert(this.dbctx.schema.guilds)
             .values({
                 id: guildId,
