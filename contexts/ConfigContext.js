@@ -51,6 +51,7 @@ const ConfigContextScheme = z.object({
     discordColors: z.object({
         success : z.string().refine(checkHexColor),
         error: z.string().refine(checkHexColor),
+        neutral: z.string().refine(checkHexColor),
     }),
     discordHelpEmbedCommands : z.array(z.string())   
 })

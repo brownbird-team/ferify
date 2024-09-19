@@ -65,10 +65,9 @@
                 "embed":{
                     "title" : "{{serverName}} status",
                     "description" : [
-                        "Whitelist : [{{whitelistStatus}}]\n",
-                        "{{verifiedRole}} : [{{verifiedRoleStatus}}]\n",
-                        "{{unverifiedRole}} : [{{unverifiedRoleStatus}}]\n",
-                        "Working [{{serverStatus}}]"
+                        "{{whitelistStatus}} | Whitelist : \n\n",
+                        "{{verifiedRoleStatus}} | Verified role {{verifiedRole}}\n\n",
+                        "{{unverifiedRoleStatus}} | Unverified role {{unverifiedRole}}"
                     ] 
                 }
             }

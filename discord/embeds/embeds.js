@@ -2,7 +2,7 @@ const {EmbedBuilder, inlineCode} = require('discord.js')
 const {ConfigContext} = require('@contexts/ConfigContext.js')
 const {TranslationContext} = require("@contexts/TranslationContext.js")
 const container = require('@root/container.js')
-
+const {StatusEnum, StatusEnum2Color} = require('@discord-utils/enums')
 const cfg = container.resolve(ConfigContext).config
 const t = container.resolve(TranslationContext).getGlobalTranslator();
 
@@ -41,7 +41,7 @@ class DiscordEmbeds{
     static async serverStatusEmbed(data){
         const embed = new EmbedBuilder()
                 .setTitle("Serv")
-                .setColor(data.serverStatus ? cfg.discordColors.success : cfg.discordColors.error)
+                .setColor(await StatusEnum2Color(data.configStatus))
                 .setTitle(t('discord.commands.server_status.embed.title', {serverName : data.serverName}))
                 .setDescription(t(
                     'discord.commands.server_status.embed.description',

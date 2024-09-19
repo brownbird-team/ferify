@@ -5,12 +5,14 @@ const { GuildService } = require('@services/GuildService.js')
 const { DatabaseContext } = require('@contexts/DatabaseContext.js')
 const { DiscordEmbeds } = require('@discord-embeds/embeds.js');
 const {ServerUtils} = require('@discord-utils/serverUtils.js')
+const {RoleUtils} = require('@discord-utils/roleUtils.js')
 const container = require('@root/container.js')
 
 const cfg = container.resolve(ConfigContext).config
 const t = container.resolve(TranslationContext).getGlobalTranslator()
-
 const guildService = container.resolve(GuildService)
+
+
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -21,22 +23,14 @@ module.exports = {
      * @param {ChatInputCommandInteraction} interaction 
      */
     async execute(interaction) {
-    const serverStatus = await guildService.getStatus(interaction.guildId)
-    const status = await ServerUtils.checkRoleStatus(serverStatus.verifiedRoleId,
-                                serverStatus.guildId,
-                                interaction.client
-    )
+
+    const roleUtils = new RoleUtils(interaction.client)
+    const serverUtils = new ServerUtils(interaction.client, roleUtils)
+        
+    const guildStatus = await guildService.getStatus(interaction.guildId)
 
         interaction.reply({ embeds: [await DiscordEmbeds.serverStatusEmbed(
-            {
-                
-                whitelistStatus: "True",
-                verifiedRole: "Role1",
-                unverifiedRole: "Role2",
-                verifiedRoleStatus: status,
-                unverifiedRoleStatus: "Bad",
-                serverStatus: "Lose"
-            }
+            await serverUtils.generateServerStatus(guildStatus, interaction.client)
         )] })
     }
 }

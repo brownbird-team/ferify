@@ -39,7 +39,8 @@
     "discrodClientId": "BOT_CLIENT_ID_GOES_HERE",
     "discordColors" : {
         "success" : "#5efc03",
-        "error" : "#ff0000"
+        "error" : "#ff0000",
+        "neutral" : "#fce303"
     },
     "discordHelpEmbedCommands" : [
         "help",
