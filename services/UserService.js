@@ -139,7 +139,7 @@ class UserService {
             throw new UserError(t('errors.noVerificationCode'));
         if (user.verified)
             throw new UserError(t('errors.alreadyVerified'));
-        if (user.code !== code)
+        if (user.code !== code || !user.codeCreated)
             throw new UserError(t('errors.invalidVerificationCode'));
 
         if (user.codeCreated) {
@@ -154,7 +154,7 @@ class UserService {
         const unverified = (
             await db.select()
                 .from(users)
-                .where(eq(users.emailHash, user.emailHash))
+                .where(and(eq(users.emailHash, user.emailHash), eq(users.verified, true)))
         ).map(user => user.id);
 
         await db.update(users).set({ verified: false, locked: false })
@@ -264,7 +264,7 @@ class UserService {
         if (!user || !user.verified)
             throw new UserError(t('errors.verificationRequired'));
 
-        if (user.locked)
+        if (!user.locked)
             throw new UserError(t('errors.alreadyUnlocked'));
 
         await db.update(users)
@@ -320,6 +320,7 @@ class UserService {
             blacklisted: true,
         }).onDuplicateKeyUpdate({
             set: {
+                permanent: false,
                 blacklisted: true,
             },
         });
@@ -381,7 +382,8 @@ class UserService {
      */
     async fetchVerifiedUserIds() {
         const res = await this.dbctx.db.select({ id: this.dbctx.schema.users.id })
-            .from(this.dbctx.schema.users);
+            .from(this.dbctx.schema.users)
+            .where(eq(this.dbctx.schema.users.verified, true));
 
         return res.map(rec => rec.id);
     }
