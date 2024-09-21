@@ -38,6 +38,8 @@ const ConfigContextScheme = z.object({
   
     imapHost: z.string(),
     imapPort: z.number(),
+    imapLog: z.boolean(),
+    imapSecure: z.boolean(),
     imapUsername: z.string(),
     imapPassword: z.string(),
   
