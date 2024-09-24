@@ -127,6 +127,7 @@
         "alreadyUnlocked": "This account is already unlocked",
         "alreadyPurged": "This account is not in bot database, nothing to purge",
         "alreadyBlacklisted": "This email address is already blacklisted",
+        "alreadyUnblacklisted": "This email address is not on our blacklist, nothing to remove from blacklist",
 
         "emailInvalid": "This email address is invalid",
 
@@ -147,7 +148,8 @@
             "verificationCode": "Verification code",
             "invalidEmailAddress": "Request denied",
             "unblacklistDenied": "Failed to fulfil your request",
-            "errorResponse": "Something went wrong"
+            "errorResponse": "Something went wrong",
+            "help": "Help message"
         },
 
         "body": {
@@ -207,9 +209,29 @@
                 "{{description}}"
             ],
 
+            "help": [
+                "{{appName}} is a simple discord bot that allows you to verify using your email ",
+                "address. It's primarly intended to be used with discord slash commands but it also ",
+                "provides you with few commands you can execute by sending an email. Following ",
+                "is the list of commands supported, you can execute command by sending an email to ",
+                "corresponding email address:\n\n",
+                "<{{helpAlias}}>\n",
+                "Bot will send you this help message.\n\n",
+                "<{{unlockAlias}}>\n",
+                "If discord account is already connected with your email and you locked your account ",
+                "using slash command, you can use this command to unlock your email\n\n",
+                "<{{blacklistAlias}}>\n",
+                "If you are not user of {{appName}} discord bot, but someone is spamming your inbox ",
+                "with verification codes, you can use this command to add your email to our blacklist. ",
+                "This way bot will not send you an email ever again, unless you specifically requested it.\n\n",
+                "<{{unblacklistAlias}}>\n",
+                "If you added your email to bot's blacklist you can use this command to undo that action."
+            ],
+
             "footer": [
+                "---\n",
                 "This email has been sent by {{appName}} discord bot, you can find more ",
-                "information about it on our website {{website}}.\n",
+                "information about it on our website {{website}}. ",
                 "For any questions you can always contact us using our support email address <{{supportEmail}}>.\n",
                 "\n",
                 "Best regards,\n",

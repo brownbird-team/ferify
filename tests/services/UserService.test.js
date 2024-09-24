@@ -317,7 +317,9 @@ describe('Testing UserService', () => {
             .rejects.toThrowError('errors.alreadyBlacklisted');
 
         await userServ.blacklist('em2');
+        expect(mailSenderServ.sendBlacklisted).to.toBeCalledWith('em2');
         await userServ.blacklist('NOT_IN_DB');
+        expect(mailSenderServ.sendBlacklisted).to.toBeCalledWith('NOT_IN_DB');
 
         const [{ cnt }] = await databaseCtx.db.select({ cnt: count() })
             .from(blacklist)

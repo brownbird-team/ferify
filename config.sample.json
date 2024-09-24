@@ -13,6 +13,8 @@
 
     "imapHost": "imap.example.com",
     "imapPort": 993,
+    "imapLog": false,
+    "imapSecure": true,
     "imapUsername": "bot@example.com",
     "imapPassword": "password1234",
     

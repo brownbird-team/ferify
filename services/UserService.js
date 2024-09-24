@@ -324,6 +324,8 @@ class UserService {
                 blacklisted: true,
             },
         });
+
+        this.sender.sendBlacklisted(email);
     }
 
     /**

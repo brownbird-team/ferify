@@ -192,6 +192,26 @@ class MailSenderService {
             })
         );
     }
+
+    /**
+     * Send response which indicates an error occurred
+     * 
+     * @param {string} email
+     */
+    async sendHelp(email) {
+        const t = this.translation.getGlobalTranslator();
+
+        await this.sendMail(email, 
+            t('email.subject.help'),
+            t('email.body.help', {
+                appName: this.config.appName,
+                helpAlias: this.config.aliasHelp,
+                unlockAlias: this.config.aliasUnlock,
+                blacklistAlias: this.config.aliasBlacklist,
+                unblacklistAlias: this.config.aliasUnblacklist,
+            })
+        );
+    }
 }
 
 exports.MailSenderService = MailSenderService;
