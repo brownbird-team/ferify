@@ -115,6 +115,22 @@ class GuildService {
                 }
             });
     }
+
+    /**
+     * Retruns list of whitelisted server
+     * @returns {Promise<string[]>} 
+     */
+    async getWhitelisted(){
+        const { db } = this.dbctx;
+        const { guilds } = this.dbctx.schema;
+
+        const res = await db.select({id : guilds.id})
+                .from(guilds)
+                .where(eq(guilds.whitelisted, true))
+
+        return res.map(row => row.id);
+
+    }
 }
 
 exports.GuildService = GuildService;

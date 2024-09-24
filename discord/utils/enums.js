@@ -30,6 +30,9 @@ const StatusEnum2Emoji = async (status) =>{
 const StatusEnum2Color = async (status) =>{
     let color;
 
+    if(status === true) color = cfg.discordColors.success;
+    if(status === false) color = cfg.discordColors.error;
+
     switch (status){
         case 1:
             color = cfg.discordColors.success;

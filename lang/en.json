@@ -65,12 +65,48 @@
                 "embed":{
                     "title" : "{{serverName}} status",
                     "description" : [
-                        "{{whitelistStatus}} | Whitelist : \n\n",
+                        "{{whitelistStatus}} | Whitelist\n\n",
                         "{{verifiedRoleStatus}} | Verified role {{verifiedRole}}\n\n",
                         "{{unverifiedRoleStatus}} | Unverified role {{unverifiedRole}}"
                     ] 
                 }
+            },
+            "send_code" : {
+                "description" : "Used to send verification code to users email",
+                "message" : "Verification code send to email : {{email}}",
+                "optionDescription" : "Email to send code to"
+            },
+            "purge" : {
+                "description" : "Used to delete all information connected with your account",
+                "message" : "Account purged successfully"
+            },
+            "lock" : {
+                "description" : "Used to prohibit bot from sending you emails",
+                "actionDescription" : "turn lock on or off",
+                "messages" :{
+                    "on" : "Account locked",
+                    "off": "Account unlocked"
+                }
+            },
+            "status" : {
+                "description" : "Used to dispaly user status",
+                "title": "Status",
+                "message" : [
+                    "{{verificationStatus}} | Verification\n\n",
+                    "{{lockStatus}} | Lock"
+
+                ]
+            },
+            "verify" : {
+                "description" : "Used to input verification code",
+                "message" : "You have been verified",
+                "optionDescription" : "Code you received"
+            },
+            "reload" : {
+                "description" : "Used to asign roles which were not given automaticly ",
+                "message" : "Roles have been reloaded"
             }
+            
         }
     },
 

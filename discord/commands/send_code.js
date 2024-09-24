@@ -4,23 +4,21 @@ const {ConfigContext} = require('@contexts/ConfigContext.js')
 const {TranslationContext} = require('@contexts/TranslationContext.js')
 const {UserService} = require('@services/UserService.js')
 const {toUserError} = require('@utils/toUserError')
-const container = require('@root/container.js');
-const { VerificationRoleUtils } = require('../utils/verificationRoleUtils');
-const { RoleUtils } = require('../utils/roleUtils');
-const { ServerUtils } = require('../utils/serverUtils');
+const container = require('@root/container.js')
 const cfg = container.resolve(ConfigContext).config
 const t = container.resolve(TranslationContext).getGlobalTranslator();
 const userService  = container.resolve(UserService)
+
 //Make description go from lang file
 module.exports = {
   cooldown: 5,
   data: new SlashCommandBuilder()
-    .setName("verify")
-    .setDescription(t("discord.commands.verify.description"))
+    .setName("send_code")
+    .setDescription(t("discord.commands.send_code.description"))
     .addStringOption((option) =>
       option
-        .setName("code")
-        .setDescription(t("discord.commands.verify.optionDescription"))
+        .setName("email")
+        .setDescription(t("discord.commands.send_code.optionDescription"))
         .setRequired(true)
     ),
   /**
@@ -28,13 +26,9 @@ module.exports = {
    * @param {ChatInputCommandInteraction} interaction
    */
   async execute(interaction) {
-    const roleUtils = new RoleUtils(interaction.client);
-    const serverUtils = new ServerUtils(interaction.client, roleUtils);
-    const verificationRoleUtils = new VerificationRoleUtils(interaction.client,roleUtils,serverUtils);  
-
-    const code = await interaction.options.getString("code");
+    const email = await interaction.options.getString("email");
     try {
-      await userService.verify(interaction.user.id, code);
+      await userService.sendCode(interaction.user.id, email);
     } catch (error) {
       await interaction.reply({
         embeds: [
@@ -47,11 +41,10 @@ module.exports = {
       });
       return;
     }
-    await verificationRoleUtils.setRolesUser(interaction.user.id)
     await interaction.reply({
         embeds: [
           await DiscordEmbeds.defaultEmbed(
-            t('discord.commands.verify.message'),
+            t('discord.commands.send_code.message', {email}),
             null,
             cfg.discordColors.success
           ),

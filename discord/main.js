@@ -9,7 +9,7 @@ const path = require('node:path');
 
 const cfg = container.resolve(ConfigContext).config
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 
 client.cooldowns = new Collection();
 client.commands = new Collection();

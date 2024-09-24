@@ -1,4 +1,3 @@
-//@ts-check
 const {Client} = require('discord.js')
 const {StatusEnum, StatusEnum2Emoji} = require('@discord-utils/enums.js');
 const { RoleUtils } = require('@discord-utils/roleUtils');

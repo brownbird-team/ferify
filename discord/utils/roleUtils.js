@@ -24,9 +24,14 @@ class RoleUtils{
     async checkRoleStatus(roleId, serverId){
         const guild = await this.client.guilds.fetch(serverId)
         const role = await guild.roles.fetch(roleId)
+        if (!role || !("editable" in role)) 
+            return StatusEnum.neutral;
         
-        if(!("editable" in role))  return StatusEnum.neutral
-        return role.editable ? StatusEnum.good : StatusEnum.bad
+        if (role.editable) 
+            return StatusEnum.good;
+        
+        return StatusEnum.bad;
+        
     }
     /**
      * @param {string} serverId
